@@ -1,7 +1,7 @@
 # ROS Beginner Tutorial
 [![License: GNU](https://img.shields.io/badge/License-GNU-green.svg)](https://opensource.org/licenses/GPL-3.0)
 
-##Overview
+## Overview
 
 This repository is made for course ENPM808X  which contains beginner tutorials of ROS C++ in publisher and subscriber node from [ROS website](http://wiki.ros.org/ROS/Tutorials/WritingPublisherSubscriber%28c%2B%2B%29)
 
@@ -13,7 +13,7 @@ This project depends on the following:
     ROS kinetic : To install ROS refer [ROS installation page](http://wiki.ros.org/kinetic/Installation/Ubuntu)
     catkin : To install catkin refer [catkin installation page](http://wiki.ros.org/catkin?distro=kinetic#Installing_catkin)
 
-##Build Instructions
+## Build Instructions
 
 We are assuming that the dependencies are met, so we now follow the below mentioned commands on terminal to clone this repository:
 
@@ -26,7 +26,7 @@ git clone https://github.com/namangupta98/beginner_tutorials.git
 cd ..
 catkin_make
 
-##Run Instructions
+## Run Instructions
 
 Open three seperate terminals. In terminal-1 type
 
