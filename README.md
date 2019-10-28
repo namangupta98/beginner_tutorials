@@ -16,7 +16,7 @@ This project depends on the following:
 ## Build Instructions
 
 We are assuming that the dependencies are met, so we now follow the below mentioned commands on terminal to clone this repository:
-
+```
 mkdir -p ~/catkin_ws/src
 cd ~/catkin_ws
 catkin_make
@@ -25,19 +25,24 @@ cd src
 git clone https://github.com/namangupta98/beginner_tutorials.git
 cd ..
 catkin_make
+```
 
 ## Run Instructions
 
 Open three seperate terminals. In terminal-1 type
 
+```
 roscore
-
+```
 In terminal-2 type
 
+```
 source ~/catkin_ws/devel/setup.bash
 rosrun beginner_tutorials talker
-
+```
 In terminal-3 type
 
+```
 source ~/catkin_ws/devel/setup.bash
 rosrun beginner_tutorials listener
+```
