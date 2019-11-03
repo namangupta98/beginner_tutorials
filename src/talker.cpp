@@ -31,10 +31,11 @@
  */
 
  /**
- *@file 		talker.cpp
- *@author 		Naman Gupta
- *@copyright 	GNU
- *@brief 		ROS publisher publishes a message to topic 
+ * @file 		talker.cpp
+ * @author 		Naman Gupta
+ * @copyright 	GNU
+ * @brief 		ROS publisher publishes a message to topic
+ * @version     2.0
  */
 
 #include <sstream>
@@ -90,22 +91,25 @@ int main(int argc, char **argv) {
     ros::Rate loop_rate(freq);
     // Let's generate log messages
     if (argc > 1) {
-    	// converting string argument to integer
+    	// Converting string argument to integer
     	freq = atoi(argv[1]);
 
     	if (freq < 0) {
+    		// For negative frequency or less than zero
     		ROS_FATAL_STREAM("Frequency cannot be negative");
     		ros::shutdown();
     		return 1;
     	}
 
     	else if (freq == 0) {
+    		// For frequency equals to '0'
     		ROS_ERROR_STREAM("Frequency cannot be zero!!");
     		ROS_INFO_STREAM("Changing frequency to 5hz");
     		freq = 5;
     	}
 
     	else if (freq >= 10) {
+    		// For frequency greater than 10
     		ROS_WARN_STREAM("Too fast to read!!");
     		ROS_INFO_STREAM("Changing frequency to 5hz");
     		freq = 5;
@@ -133,6 +137,7 @@ int main(int argc, char **argv) {
     ros::Publisher chatter_pub = n.advertise < std_msgs::String
     > ("chatter", 1000);
 
+    // For service to changeBaseOutputString
     ros::ServiceServer server = n.advertiseService("changeBaseOutputString",newMessage);
 
 	/**
