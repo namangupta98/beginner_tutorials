@@ -45,19 +45,18 @@
 /**
  * String that will be modified by the user
  */
-
 std::string message = " Naman talking ";
 
 /**
  * @brief function to change the base string output
- * @param request Data request sent to service
- * @param response Response provided to client
+ * @param req Data request sent to service
+ * @param res Response provided to client
  * @return bool
  */
-
 bool newMessage(beginner_tutorials::changeBaseOutputString::Request &req,
 				beginner_tutorials::changeBaseOutputString::Response &res) {
 	message = req.originalString;
+	ROS_INFO_STREAM("The string is changed to ");
 	res.newString = req.originalString;
 	return true;
 }
@@ -78,12 +77,41 @@ int main(int argc, char **argv) {
 	 */
     ros::init(argc, argv, "talker");
 
+    // Using a variable to store freq
+    int freq = 2;
+
 	/**
 	 * NodeHandle is the main access point to communications with the ROS system.
 	 * The first NodeHandle constructed will fully initialize this node, and the last
 	 * NodeHandle destructed will close down the node.
 	 */
     ros::NodeHandle n;
+
+    ros::Rate loop_rate(freq);
+    // Let's generate log messages
+    if (argc == 1) {
+    	ROS_FATAL_STREAM("No frequency entered!!");
+    	ros::shutdown();
+    	return 1;
+    }
+
+    else if (argc > 1) {
+    	// converting string argument to integer
+    	freq = atoi(argv[1]);
+
+    	if (freq <= 0) {
+    		ROS_ERROR_STREAM("Frequency cannot be less than 1");
+    		ROS_INFO_STREAM("Changing frequency to 5hz");
+    		freq = 5;
+    	}
+
+    	else if (freq >= 10) {
+    		ROS_WARN_STREAM("Too fast to read!!");
+    		ROS_INFO_STREAM("Changing frequency to 5hz");
+    		freq = 5;
+    	}
+    }
+
 
 	/**
 	 * The advertise() function is how you tell ROS that you want to
@@ -107,21 +135,21 @@ int main(int argc, char **argv) {
 
     ros::ServiceServer server = n.advertiseService("changeBaseOutputString",newMessage);
 
-    ros::Rate loop_rate(10);
-
 	/**
 	 * A count of how many messages we have sent. This is used to create
 	 * a unique string for each message.
 	 */
     int count = 0;
     while (ros::ok()) {
+    	ROS_DEBUG_STREAM_ONCE("Current frequency: " << freq);
+
 		/**
 		 * This is a message object. You stuff it with data, and then publish it.
 		 */
         std_msgs::String msg;
 
         std::stringstream ss;
-        ss << message << count;
+        ss << message;
         msg.data = ss.str();
 
         ROS_INFO("%s", msg.data.c_str());
