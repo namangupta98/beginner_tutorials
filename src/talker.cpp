@@ -89,18 +89,18 @@ int main(int argc, char **argv) {
 
     ros::Rate loop_rate(freq);
     // Let's generate log messages
-    if (argc == 1) {
-    	ROS_FATAL_STREAM("No frequency entered!!");
-    	ros::shutdown();
-    	return 1;
-    }
-
-    else if (argc > 1) {
+    if (argc > 1) {
     	// converting string argument to integer
     	freq = atoi(argv[1]);
 
-    	if (freq <= 0) {
-    		ROS_ERROR_STREAM("Frequency cannot be less than 1");
+    	if (freq < 0) {
+    		ROS_FATAL_STREAM("Frequency cannot be negative");
+    		ros::shutdown();
+    		return 1;
+    	}
+
+    	else if (freq == 0) {
+    		ROS_ERROR_STREAM("Frequency cannot be zero!!");
     		ROS_INFO_STREAM("Changing frequency to 5hz");
     		freq = 5;
     	}
