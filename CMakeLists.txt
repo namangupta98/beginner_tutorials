@@ -9,11 +9,12 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
   genmsg
+  message_generation
 )
 
 #Declare ROS messages and services
-#add_service_files(FILES NUM.msg)
-#add_service_files(FILES AddTwoInts.srv)
+add_service_files(FILES changeBaseOutputString.srv)
+
 
 ## Generate added messages and services
 generate_messages(DEPENDENCIES std_msgs)
