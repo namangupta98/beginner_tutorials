@@ -1,3 +1,6 @@
+./talker.cpp:57:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseOutputString::Request &req  [runtime/references] [2]
+./talker.cpp:58:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::changeBaseOutputString::Response &res  [runtime/references] [2]
 Done processing ./talker.cpp
 Done processing ./listener.cpp
+Total errors found: 2
 
