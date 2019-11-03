@@ -37,9 +37,30 @@
  *@brief 		ROS publisher publishes a message to topic 
  */
 
+#include <sstream>
 #include <ros/ros.h>
 #include <std_msgs/String.h>
-#include <sstream>
+#include "beginner_tutorials/changeBaseOutputString.h"
+
+/**
+ * String that will be modified by the user
+ */
+
+std::string message = " Naman talking ";
+
+/**
+ * @brief function to change the base string output
+ * @param request Data request sent to service
+ * @param response Response provided to client
+ * @return bool
+ */
+
+bool newMessage(beginner_tutorials::changeBaseOutputString::Request &req,
+				beginner_tutorials::changeBaseOutputString::Response &res) {
+	message = req.originalString;
+	res.newString = req.originalString;
+	return true;
+}
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
@@ -84,6 +105,8 @@ int main(int argc, char **argv) {
     ros::Publisher chatter_pub = n.advertise < std_msgs::String
     > ("chatter", 1000);
 
+    ros::ServiceServer server = n.advertiseService("changeBaseOutputString",newMessage);
+
     ros::Rate loop_rate(10);
 
 	/**
@@ -98,7 +121,7 @@ int main(int argc, char **argv) {
         std_msgs::String msg;
 
         std::stringstream ss;
-        ss << " Naman Gupta talking. " << count;
+        ss << message << count;
         msg.data = ss.str();
 
         ROS_INFO("%s", msg.data.c_str());
