@@ -31,11 +31,11 @@
  */
 
 /**
- * @file 		talker.cpp
- * @author 		Naman Gupta
- * @copyright 	GNU
- * @brief 		ROS publisher publishes a message to topic
- * @version     2.0
+ * @file 		   talker.cpp
+ * @author 		 Naman Gupta
+ * @copyright  GNU
+ * @brief 		 ROS publisher publishes a message to topic
+ * @version    2.0
  */
 
 #include <tf/transform_broadcaster.h>
@@ -155,10 +155,12 @@ int main(int argc, char **argv) {
   while (ros::ok()) {
     ROS_DEBUG_STREAM_ONCE("Current frequency: " << freq);
 
+    // Non zero translation and rotation
     quat.setRPY(0, 0, 1);
     trans.setRotation(quat);
     trans.setOrigin( tf::Vector3(sin(ros::Time::now().toSec()),
                           cos(ros::Time::now().toSec()), 0.0) );
+    // Sending transform using TransformBroadcaster
     bc.sendTransform(tf::StampedTransform(trans, ros::Time::now(), "world", "talk"));
 
     /**
