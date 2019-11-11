@@ -1,5 +1,5 @@
 <launch>
-  <node pkg="beginner_tutorials" name="talker" type="talker" />
-  <test pkg="beginner_tutorials" test-name="unitTest" type="unitTest" />
+  <node pkg="beginner_tutorials" name="talker" type="talker" output = "screen"/>
+  <test pkg="beginner_tutorials" type="unitTest" test-name="unitTest" />
 </launch>
 
