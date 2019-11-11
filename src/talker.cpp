@@ -47,8 +47,7 @@
 /**
  * String that will be modified by the user
  */
-std::string message = " Naman talking ";
-extern std::string message;
+extern std::string message = "Naman talking";
 
 /**
  * @brief function to change the base string output
@@ -158,10 +157,11 @@ int main(int argc, char **argv) {
     // Non zero translation and rotation
     quat.setRPY(0, 0, 1);
     trans.setRotation(quat);
-    trans.setOrigin( tf::Vector3(sin(ros::Time::now().toSec()),
+    trans.setOrigin(tf::Vector3(sin(ros::Time::now().toSec()),
                           cos(ros::Time::now().toSec()), 0.0) );
     // Sending transform using TransformBroadcaster
-    bc.sendTransform(tf::StampedTransform(trans, ros::Time::now(), "world", "talk"));
+    bc.sendTransform(tf::StampedTransform(trans,
+        ros::Time::now(), "world", "talk"));
 
     /**
      * This is a message object. You stuff it with data, and then publish it.

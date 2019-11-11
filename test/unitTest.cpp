@@ -66,8 +66,8 @@ TEST(MessageTest, checkExistence) {
 
 // Run all the tests that were declared with TEST()
 int main(int argc, char **argv) {
-	testing::InitGoogleTest(&argc, argv);
-	ros::init(argc, argv, "tester");
-	ros::NodeHandle n;
-	return RUN_ALL_TESTS();
+    testing::InitGoogleTest(&argc, argv);
+    ros::init(argc, argv, "tester");
+    ros::NodeHandle n;
+    return RUN_ALL_TESTS();
 }
