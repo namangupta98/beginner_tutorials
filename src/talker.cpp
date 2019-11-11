@@ -38,6 +38,7 @@
  * @version     2.0
  */
 
+#include <tf/transform_broadcaster.h>
 #include <ros/ros.h>
 #include <std_msgs/String.h>
 #include <sstream>
@@ -46,7 +47,8 @@
 /**
  * String that will be modified by the user
  */
-extern std::string message = " Naman talking ";
+std::string message = " Naman talking ";
+extern std::string message;
 
 /**
  * @brief function to change the base string output
@@ -87,6 +89,15 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
+
+  // Creating an object br for TransforBroadcaster
+  static tf::TransformBroadcaster bc;
+
+  // Creating an object transform for Transform
+  tf::Transform trans;
+
+  // Creating an object q for Quaternion
+  tf::Quaternion quat;
 
   ros::Rate loop_rate(freq);
   // Let's generate log messages
@@ -144,6 +155,12 @@ int main(int argc, char **argv) {
   while (ros::ok()) {
     ROS_DEBUG_STREAM_ONCE("Current frequency: " << freq);
 
+    quat.setRPY(0, 0, 1);
+    trans.setRotation(quat);
+    trans.setOrigin( tf::Vector3(sin(ros::Time::now().toSec()),
+                          cos(ros::Time::now().toSec()), 0.0) );
+    bc.sendTransform(tf::StampedTransform(trans, ros::Time::now(), "world", "talk"));
+
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
@@ -153,7 +170,7 @@ int main(int argc, char **argv) {
     ss << message;
     msg.data = ss.str();
 
-    ROS_INFO("%s", msg.data.c_str());
+    ROS_INFO_STREAM(msg.data.c_str());
 
     /**
      * The publish() function is how you send messages. The parameter
