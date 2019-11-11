@@ -45,7 +45,7 @@
  * This tutorial demonstrates simple receipt of messages over the ROS system.
  */
 void chatterCallback(const std_msgs::String::ConstPtr& msg) {
-  ROS_INFO("I heard: [%s]", msg->data.c_str());
+  ROS_INFO_STREAM(msg->data.c_str());
 }
 
 int main(int argc, char **argv) {
