@@ -40,3 +40,61 @@ cd catkin_ws
 source devel/setup.bash
 rosservice call /changeBaseOutputString "Hi"
 ```
+## Inspect TF Frames
+
+The tf frame is verified and inspected by rqt_tf_tree and tf_echo package. Open a new terminal and type the following commands
+
+```
+cd catkin_ws
+source devel/setup.bash
+rosrun tf tf_echo /world /talk
+rosrun tf view_frames
+evince frames.pdf
+rosrun rqt_tf_tree rqt_tf_tree
+```
+The output of the above is generated in the a pdf titles frames.pdf, which is included in the Results sub directory.
+
+## Rosbag
+
+The rosbag recording is disabled by default so when you type
+
+```
+roslaunch beginner_tutorials launcher.launch
+```
+Only launch file is executed. To generate a new rosbag file type 
+
+```
+roslaunch beginner_tutorials launcher.launch rosbagEnable:=true
+```
+A bag file will be created in Results directory which is recorded for 15 seconds. To play the ROS bag file, terminate the talker and listener nodes, and run the following command after launching roscore in a new terminal.
+
+```
+rosrun beginner_tutorials listener
+```
+Open new terminal, and navigate to Results directory.
+
+```
+cd cakin_ws/src/beginner_tutorials/Results
+rosbag play rec.bag
+```
+You will see that the message stored in bagfile is running as talker and listener can hear the talker in the listener terminal. o get information about the rosbag file you can type
+```
+rosbag info rec.bag
+```
+
+## Tests
+
+Close and terminate everything including rosmaster. In a new terminal, switch to the ROS workspace and build the tests. Type
+
+```
+cd catkin_ws
+source devel/setup.bash
+catkin_make run_tests_beginner_tutorials
+```
+
+The above command will also run the tests after few seconds. You can also type the following command to run all test using launch file.
+
+```
+rostest beginner_tutorials unitTest.launch
+```
+The above can only be executed after the tests are built.
