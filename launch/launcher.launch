@@ -3,7 +3,7 @@
 	<arg name = "freq" default = "5" />
 	<arg
 		name = "rosbagEnable"
-		default = "true"
+		default = "false"
 	/>
 	<node
 		pkg = "beginner_tutorials"
