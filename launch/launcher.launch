@@ -1,6 +1,10 @@
 <launch>
 
 	<arg name = "freq" default = "5" />
+	<arg
+		name = "rosbagEnable"
+		default = "true"
+	/>
 	<node
 		pkg = "beginner_tutorials"
 		type = "talker"
@@ -16,4 +20,12 @@
 		output = "screen"
 		launch-prefix = "xterm -e"
 	/>
+
+	<node
+	  	pkg="rosbag"
+	  	name="record"
+	  	type="record"
+	  	args="--duration=15 -a -O $(find beginner_tutorials)/Results/rec"
+	  	if="$(arg rosbagEnable)"
+  	/>
 </launch>
